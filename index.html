@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Siyu Naina</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Lora:ital,wght@0,400;1,400&display=swap">
+<style>
+:root{--sky1:#0c1030;--sky2:#2a1d4e;--moon:#fbf3d6;--gold:#f4c97a;--text:#f6eee0;--soft:#cdbfd6}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);font-family:Lora,Georgia,serif;line-height:1.75;background:linear-gradient(180deg,var(--sky1),var(--sky2) 70%,#47295a);background-attachment:fixed;min-height:100svh;overflow-x:hidden}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:1}}
+.moon{position:fixed;top:calc(env(safe-area-inset-top,0px) + 54px);right:8vw;width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffbe8,var(--moon) 60%,#e4d6a8);box-shadow:0 0 50px 14px rgba(251,243,214,.35);z-index:0}
+.moon::before,.moon::after{content:"";position:absolute;border-radius:50%;background:rgba(160,140,100,.22)}
+.moon::before{width:20px;height:20px;left:22px;top:48px}.moon::after{width:12px;height:12px;left:56px;top:24px}
+.balloons{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.b{position:absolute;bottom:-120px;width:38px;height:50px;border-radius:50% 50% 48% 48%;opacity:.55;animation:up linear infinite}
+.b::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:36px;background:rgba(255,255,255,.4)}
+@keyframes up{to{transform:translateY(-120vh) rotate(6deg)}}
+#splash{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:linear-gradient(180deg,var(--sky1),var(--sky2));text-align:center;padding:24px;cursor:pointer;transition:opacity 1s}
+#splash.gone{opacity:0;pointer-events:none}
+#splash .m{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffbe8,var(--moon) 60%,#e4d6a8);box-shadow:0 0 60px 18px rgba(251,243,214,.4)}
+#splash h2{font-family:Caveat,cursive;font-weight:500;font-size:2.6rem;margin:0;line-height:1.1}
+#splash p{margin:0;color:var(--soft)}
+#splash button{font:inherit;background:var(--gold);color:#241838;border:0;border-radius:999px;padding:14px 30px;cursor:pointer;font-size:1.05rem}
+button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#toggle{position:fixed;z-index:15;top:calc(env(safe-area-inset-top,0px) + 12px);left:12px;font:inherit;font-size:.9rem;color:var(--text);background:rgba(20,14,40,.65);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:9px 16px;cursor:pointer;backdrop-filter:blur(6px)}
+main{position:relative;z-index:2}
+section{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 22px;text-align:center}
+h1{font-family:Caveat,cursive;font-weight:500;font-size:clamp(3.2rem,16vw,5.6rem);line-height:1.02;margin:0 0 10px;text-shadow:0 0 30px rgba(244,201,122,.45)}
+.sub{color:var(--soft);font-style:italic;max-width:24em;margin:0}
+.letter p{max-width:30em;margin:0 auto 20px;font-size:1.12rem}
+.letter .big{font-family:Caveat,cursive;font-size:2.3rem;color:var(--gold);line-height:1.25}
+.gal{display:flex;flex-direction:column;gap:26px;align-items:center;width:100%;max-width:520px}
+.gal img{width:100%;display:block;border-radius:10px;border:6px solid #f6eee0;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+.gal img:nth-child(odd){transform:rotate(-1.2deg)}.gal img:nth-child(even){transform:rotate(1.2deg)}
+.end{font-family:Caveat,cursive;font-size:2.4rem;line-height:1.3;max-width:13em}
+.from{color:var(--soft);margin-top:10px}
+#fx{position:fixed;inset:0;z-index:30;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.b,.star{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="stars" aria-hidden="true"></div>
+<div class="moon" aria-hidden="true"></div>
+<div class="balloons" id="balloons" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<div id="splash" role="button" tabindex="0" aria-label="Open">
+  <div class="m"></div>
+  <h2>A little something for you</h2>
+  <p>Turn your sound on</p>
+  <button type="button">Tap to open</button>
+</div>
+
+<button id="toggle" type="button" aria-pressed="false">Music: on</button>
+<audio id="audio" src="song.mp3" loop preload="auto"></audio>
+
+<main>
+  <section>
+    <h1>Happy Birthday, Siyu Naina</h1>
+    <p class="sub">Some people feel like home. This is for you.</p>
+  </section>
+  <section class="letter">
+    <p class="big">You felt like home.</p>
+    <p>Thank you for being my comfort when things were heavy, and my strength on days I didn’t have much of my own.</p>
+    <p>I care about you, and I like you. Every memory we made is still close to me, and I’m grateful for all of them.</p>
+    <p>On your birthday, I hope the world gives you back all the kindness you give to everyone else. I will always wish good things for you.</p>
+  </section>
+  <section>
+    <div class="gal">
+      <img src="photo1.jpg" alt="" loading="lazy">
+      <img src="photo2.jpg" alt="" loading="lazy">
+      <img src="photo3.jpg" alt="" loading="lazy">
+      <img src="photo4.jpg" alt="" loading="lazy">
+    </div>
+  </section>
+  <section>
+    <p class="end">Happy birthday. May this year be gentle and bright for you.</p>
+    <p class="from">With care, Lakshya</p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var st=document.getElementById('stars'),i,s;
+  for(i=0;i<90;i++){s=document.createElement('span');s.className='star';
+    s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=(Math.random()*3)+'s';st.appendChild(s);}
+  var bl=document.getElementById('balloons'),cols=['#f08fb0','#f4c97a','#8fc6f0','#b69af0','#8fe0c0','#f0a28f'],b;
+  for(i=0;i<8;i++){b=document.createElement('span');b.className='b';
+    b.style.left=(5+i*12)+'%';b.style.background=cols[i%cols.length];
+    b.style.animationDuration=(16+Math.random()*10)+'s';b.style.animationDelay=(-Math.random()*20)+'s';bl.appendChild(b);}
+
+  var audio=document.getElementById('audio'),tg=document.getElementById('toggle'),sp=document.getElementById('splash');
+  function setLabel(){tg.textContent=audio.paused?'Music: off':'Music: on';tg.setAttribute('aria-pressed',String(!audio.paused));}
+  tg.addEventListener('click',function(){
+    if(audio.paused){audio.play().catch(function(){});}else{audio.pause();}
+    setTimeout(setLabel,60);
+  });
+  audio.addEventListener('play',setLabel);audio.addEventListener('pause',setLabel);
+
+  function confetti(){
+    var c=document.getElementById('fx'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+    var p=[],k;for(k=0;k<140;k++)p.push({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*14,vy:Math.random()*-14-2,r:3+Math.random()*4,c:cols[k%cols.length]});
+    var t=0;(function f(){x.clearRect(0,0,c.width,c.height);p.forEach(function(q){q.x+=q.vx;q.y+=q.vy;q.vy+=.28;x.fillStyle=q.c;x.fillRect(q.x,q.y,q.r,q.r*1.6);});
+      if(++t<130)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height);})();
+  }
+  function open(){
+    if(sp.classList.contains('gone'))return;
+    sp.classList.add('gone');
+    audio.play().catch(function(){});
+    if(!matchMedia('(prefers-reduced-motion:reduce)').matches)confetti();
+    setLabel();
+  }
+  sp.addEventListener('click',open);
+  sp.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  setLabel();
+})();
+</script>
+</body>
+</html>
